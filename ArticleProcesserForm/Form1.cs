@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -191,16 +192,6 @@ public class TextProcessing {
             tempArticle.Date = dateString;
             tempArticle.Source = sourceString;
 
-            string bodyString = tempArticle.Body;
-            bodyString = ReplaceCharactersWithSpace(bodyString, PunctuationCharacters); // Replace punctuation with spaces
-            bodyString = RemoveAdjacentDuplicatesOfChar(bodyString, ' '); // Remove duplicate adjecent spaces
-            // Parse string list from string delimiting by spaces
-            tempArticle.BodyWords = new List<string>(bodyString.Trim().Split(' '));
-
-            string headerString = tempArticle.Header;
-            headerString = ReplaceCharactersWithSpace(headerString, PunctuationCharacters);
-            headerString = RemoveAdjacentDuplicatesOfChar(headerString, ' ');
-            tempArticle.HeaderWords = new List<string>(headerString.Trim().Split(' '));
 
             //for (int j = 0; j < bodyWords.Count; j++) {
             //    Console.Write("\"" + bodyWords[j] + "\"");
@@ -236,6 +227,7 @@ public class TextProcessing {
         return tempText.Substring(startIndex, endIndex - startIndex - 1).Trim();
     }
 
+    /* Obsolete, replaced with Regex
     private string ReplaceCharactersWithSpace(string RString, char[] Chars2Remove) {
         for (int i = 0; i < Chars2Remove.Length; i++) {
             RString = RString.Replace(Chars2Remove[i], ' ');
@@ -251,4 +243,5 @@ public class TextProcessing {
         }
         return RString;
     }
+    */
 }
